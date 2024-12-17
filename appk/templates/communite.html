@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Hub</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background: #0077be;
+            color: white;
+            padding: 20px 10px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        header p {
+            margin-top: 10px;
+            font-size: 1.2em;
+        }
+        header ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        header ul li {
+            display: inline-block;
+        }
+        header button {
+            padding: 12px 20px;
+            font-size: 1em;
+            background-color: #0077be;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        header button:hover {
+            background-color: #005a8d;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+        .card {
+            background: white;
+            width: 250px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+            padding: 20px;
+        }
+        .card img {
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+        .card h3 {
+            margin: 0;
+            color: #333;
+        }
+        .card p {
+            color: #666;
+            font-size: 0.9em;
+            margin: 10px 0;
+        }
+        .card button {
+            padding: 8px 15px;
+            background-color: #0077be;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .card button:hover {
+            background-color: #005a8d;
+        }
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+        .hidden {
+            display: none;
+        }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            overflow: auto;
+            padding-top: 60px;
+            text-align: center;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 8px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        #cameraStream video {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 8px;
+        }
+    </style>
+    
+    <script>window.PICKAXE=window.PICKAXE||{pickaxes:[],style:"kHsjoCQGgI0GWASmgIdIAxiDA6wgM6CMbgC4UgDDAXYEAvDIBoGEBgG4CAWQIGYBgwCqApdoEjggjIaCcCoCA9gVAaAnBYBkqgBkKBwWoARYgJhrAFwqAFQEAHkIAXAQAASgbCfAhqSAAAsDMAYEc+QJckgGXFAhUGBQ30DEcIGo0wBBdgS5VAcAaATm8A1GoCpYQJQmgEVYAYgDBAQRKAhe0ASXIAURAOyAimqAFxCAsEGAQjSADFiACCIASoAACIBA+oAAeoBI8IAhHIAkEYAqCYAuaYAAIYAyboA2CYA/O4CwJYBLUIAWQYB8QoB2EIAtKYAAg4BuaoA9c4B7QYAJf4A6GICCSYCLh4CPYYCUI4BxGYCbOYB9eYCjTYBUVYCJq4BjX4AVZ4CZuYBFd4AvoYBMKoANpIAMSIBQFIDP3QDigDKKgFjigIhcLoBAC4CIF4BhGIAIDIBQhIBBYIAFHoBeKIBQsYAAcMAABSAApTAMQ1ACBAOjSgAYhAAogA0KQBczoAAhEAL0CATIRAOJEgDQmQBhcIAQ1EAigGAEotANxkgBj0QBIj4ATSUABlOAAhzAEbAgAaOQBSFYAmNkAuKxsQCOjYA8j8ABJaAKTjACIlABpACsugGwMQAiwIAm1MATAKAd07ABkcgGBKwCgVIBiocA0E2AIaBAAoDgALDQDl7oBagcAboiAGdFAFEJgAAYQDkIIAKAcAIYAAIkA9X6AXwdAJbbgAAAwAQo4A0BUAkMAAEEAb0iAZHJAFBngGzWI6AL0DAL4NgAQSQCsBoB6C8AExmALANAAXwgCACwA1BgAOQCAwIBGtMATS6AT4LAMQ7gDfbQDOG4AM3cAGoWACUTAONugEuLQAKwYArycAFjGAAxvAI0lgEeCwAjGoBAn0AkTCAFbrAOOogEwaQAAwIA0CMAIVCAQ/HADMVgF47QCEDoAF8sAb5iAdzZAJ48ADTAH3TgFYQwCXE4BiEEAAASAFjXALzWgAiKwAo+EAaghAFntQAknUAIgbACziQBC4MAGAhAFK8QAAicAAf7AFC4QARf0AJVxADpOQAsyUADeNAE87wAikIAACAA"},window.PICKAXE.pickaxes.push({id:"IOM_CHATBOT_PMEID",type:"fab"});const{id:_fid}=window.PICKAXE.pickaxes[0];fetch(`https://embed.pickaxeproject.com/axe/api/script/${_fid}`).then((e=>e.json())).then((({v:e})=>{const t=`https://cdn.jsdelivr.net/gh/pickaxeproject/cdn@${e}/dist`;if(!document.querySelector(`script[src="${t}/bundle.js"]`)){const e=document.createElement("script");e.src=t+"/bundle.js",e.defer=!0,document.head.appendChild(e)}}));</script>
+
+</head>
+<body>
+
+<header>
+    <h1>Community Hub</h1>
+    <p>Connect with users and start a video call</p>
+    <ul>
+        <li><button onclick="showSection('camera')">Start Camera</button></li>
+        <li><button onclick="showSection('message')">Start Message</button></li>
+        <li><button onclick="showSection('chat')">Chat Room</button></li>
+    </ul>
+</header>
+
+ 
+
+<div id="cameraSection" class="hidden">
+    <div class="container">
+        <div class="card">
+            <img src="https://via.placeholder.com/80" alt="User Profile">
+            <h3>John Doe</h3>
+            <p>Language: English</p>
+            <button onclick="startCamera('John Doe')">Start Camera</button>
+        </div>
+
+        <div class="card">
+            <img src="https://via.placeholder.com/80" alt="User Profile">
+            <h3>Maria Lopez</h3>
+            <p>Language: Spanish</p>
+            <button onclick="startCamera('Maria Lopez')">Start Camera</button>
+        </div>
+
+        <div class="card">
+            <img src="https://via.placeholder.com/80" alt="User Profile">
+            <h3>Ali Ahmed</h3>
+            <p>Language: Arabic</p>
+            <button onclick="startCamera('Ali Ahmed')">Start Camera</button>
+        </div>
+
+        <div class="card">
+            <img src="https://via.placeholder.com/80" alt="User Profile">
+            <h3>Sophie Müller</h3>
+            <p>Language: German</p>
+            <button onclick="startCamera('Sophie Müller')">Start Camera</button>
+        </div>
+    </div>
+</div>
+
+<div id="messageSection" class="hidden">
+    <div class="container">
+        <p>Start your message conversation here.</p>
+    </div>
+</div>
+
+<div id="chatSection" class="hidden">
+    <div class="row justify-content-center">
+        <div class="card-body">
+            <iframe src="https://tlk.io/iom" data-channel="iventy" data-theme="theme--night"
+                    style="width:100%; height:770px; border:none; background-color: rgb(255, 255, 255); padding: 20px;">
+            </iframe>
+            <script async src="https://tlk.io/embed.js" type="text/javascript"></script>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div id="cameraModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Camera Stream</h2>
+        <div id="cameraStream">
+            <video id="videoElement" autoplay></video>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2024 Community Hub. All rights reserved.</p>
+</footer>
+
+<script>
+    function startCamera(userName) {
+        alert("Starting camera for " + userName);
+        // Show modal for the camera stream
+        document.getElementById('cameraModal').style.display = "block";
+
+        // Access the user's camera
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then((stream) => {
+                let videoElement = document.getElementById('videoElement');
+                videoElement.srcObject = stream;
+            })
+            .catch((error) => {
+                alert("Failed to start the camera: " + error.message);
+            });
+    }
+
+    function closeModal() {
+        // Close the modal and stop the video stream
+        let modal = document.getElementById('cameraModal');
+        modal.style.display = "none";
+        let videoElement = document.getElementById('videoElement');
+        let stream = videoElement.srcObject;
+        if (stream) {
+            let tracks = stream.getTracks();
+            tracks.forEach(track => track.stop()); // Stop the video stream
+            videoElement.srcObject = null;
+        }
+    }
+
+    function showSection(section) {
+        // Hide all sections
+        document.getElementById('cameraSection').classList.add('hidden');
+        document.getElementById('messageSection').classList.add('hidden');
+        document.getElementById('chatSection').classList.add('hidden');
+
+        // Show the selected section
+        if (section === 'camera') {
+            document.getElementById('cameraSection').classList.remove('hidden');
+        } else if (section === 'message') {
+            document.getElementById('messageSection').classList.remove('hidden');
+        } else if (section === 'chat') {
+            document.getElementById('chatSection').classList.remove('hidden');
+        }
+    }
+</script>
+
+</body>
+</html>

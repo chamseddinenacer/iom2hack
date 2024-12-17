@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translation Assistant - IOM Migration Support</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background: #0077be;
+            color: white;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: 3px solid #005a8d;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            padding-bottom: 10px;
+        }
+        nav {
+            background: #005a8d;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+        }
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #0077be;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+        button:hover {
+            background-color: #005a8d;
+        }
+        #loadingIndicator {
+            display: none;
+            text-align: center;
+            color: #0077be;
+        }
+        #resultArea {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+        }
+        .translation-form-group textarea {
+            width: 90%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+    
+    <script>window.PICKAXE=window.PICKAXE||{pickaxes:[],style:"kHsjoCQGgI0GWASmgIdIAxiDA6wgM6CMbgC4UgDDAXYEAvDIBoGEBgG4CAWQIGYBgwCqApdoEjggjIaCcCoCA9gVAaAnBYBkqgBkKBwWoARYgJhrAFwqAFQEAHkIAXAQAASgbCfAhqSAAAsDMAYEc+QJckgGXFAhUGBQ30DEcIGo0wBBdgS5VAcAaATm8A1GoCpYQJQmgEVYAYgDBAQRKAhe0ASXIAURAOyAimqAFxCAsEGAQjSADFiACCIASoAACIBA+oAAeoBI8IAhHIAkEYAqCYAuaYAAIYAyboA2CYA/O4CwJYBLUIAWQYB8QoB2EIAtKYAAg4BuaoA9c4B7QYAJf4A6GICCSYCLh4CPYYCUI4BxGYCbOYB9eYCjTYBUVYCJq4BjX4AVZ4CZuYBFd4AvoYBMKoANpIAMSIBQFIDP3QDigDKKgFjigIhcLoBAC4CIF4BhGIAIDIBQhIBBYIAFHoBeKIBQsYAAcMAABSAApTAMQ1ACBAOjSgAYhAAogA0KQBczoAAhEAL0CATIRAOJEgDQmQBhcIAQ1EAigGAEotANxkgBj0QBIj4ATSUABlOAAhzAEbAgAaOQBSFYAmNkAuKxsQCOjYA8j8ABJaAKTjACIlABpACsugGwMQAiwIAm1MATAKAd07ABkcgGBKwCgVIBiocA0E2AIaBAAoDgALDQDl7oBagcAboiAGdFAFEJgAAYQDkIIAKAcAIYAAIkA9X6AXwdAJbbgAAAwAQo4A0BUAkMAAEEAb0iAZHJAFBngGzWI6AL0DAL4NgAQSQCsBoB6C8AExmALANAAXwgCACwA1BgAOQCAwIBGtMATS6AT4LAMQ7gDfbQDOG4AM3cAGoWACUTAONugEuLQAKwYArycAFjGAAxvAI0lgEeCwAjGoBAn0AkTCAFbrAOOogEwaQAAwIA0CMAIVCAQ/HADMVgF47QCEDoAF8sAb5iAdzZAJ48ADTAH3TgFYQwCXE4BiEEAAASAFjXALzWgAiKwAo+EAaghAFntQAknUAIgbACziQBC4MAGAhAFK8QAAicAAf7AFC4QARf0AJVxADpOQAsyUADeNAE87wAikIAACAA"},window.PICKAXE.pickaxes.push({id:"IOM_CHATBOT_PMEID",type:"fab"});const{id:_fid}=window.PICKAXE.pickaxes[0];fetch(`https://embed.pickaxeproject.com/axe/api/script/${_fid}`).then((e=>e.json())).then((({v:e})=>{const t=`https://cdn.jsdelivr.net/gh/pickaxeproject/cdn@${e}/dist`;if(!document.querySelector(`script[src="${t}/bundle.js"]`)){const e=document.createElement("script");e.src=t+"/bundle.js",e.defer=!0,document.head.appendChild(e)}}));</script>
+
+</head>
+<body>
+    <header>
+        <div class="containerr">
+            <h1>IOM Migration Support</h1>
+        </div>
+    </header>
+
+    <nav>
+        <a href="">Home</a>
+        <a href="/Communite">Communite hub</a>
+        <a href="/translation">IOM.ia</a>
+        <a href="/med">Dr. Translate</a>
+        <a href="#">Migration Services</a>
+        <a href="/about">About Us</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <div class="container">
+        <p>Please select a language for the patient and doctor, then click "Start" to begin the conversation.</p>
+
+        <form>
+            <div>
+                <label for="patientLanguage">Patient: Select a Language</label>
+                <select id="patientLanguage">
+                    <option value="en_XX">English</option>
+                    <option value="fr_XX">French</option>
+                    <option value="ar_AR">Arabic</option>
+                    <option value="de_DE">German</option>
+                    <option value="es_XX">Spanish</option>
+                    <option value="it_IT">Italian</option>
+                    <option value="zh_CN">Chinese</option>
+                    <option value="ru_RU">Russian</option>
+                    <option value="ja_XX">Japanese</option>
+                    <option value="tr_TR">Turkish</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="doctorLanguage">Doctor: Select a Language</label>
+                <select id="doctorLanguage">
+                    <option value="en_XX">English</option>
+                    <option value="fr_XX">French</option>
+                    <option value="ar_AR">Arabic</option>
+                    <option value="de_DE">German</option>
+                    <option value="es_XX">Spanish</option>
+                    <option value="it_IT">Italian</option>
+                    <option value="zh_CN">Chinese</option>
+                    <option value="ru_RU">Russian</option>
+                    <option value="ja_XX">Japanese</option>
+                    <option value="tr_TR">Turkish</option>
+                </select>
+            </div>
+
+            <div class="translation-form-group">
+                <label for="sourceText">Text to Translate:</label>
+                <textarea id="sourceText" rows="12" placeholder="Enter your text here..."></textarea>
+            </div>
+
+            <button type="button" id="startBtn">Start</button>
+            <button type="button" id="showHistoryBtn">Show Conversation History</button>
+        </form>
+
+        <!-- Result Area -->
+        <div id="loadingIndicator">Loading...</div>
+        <div id="resultArea"></div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 IOM Migration Support. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById("startBtn").addEventListener("click", function () {
+            const sourceLang = document.getElementById("patientLanguage").value;
+            const targetLang = document.getElementById("doctorLanguage").value;
+            const sourceText = document.getElementById("sourceText").value;
+            const resultArea = document.getElementById("resultArea");
+            const loadingIndicator = document.getElementById("loadingIndicator");
+
+            loadingIndicator.style.display = "block";
+            resultArea.innerText = "";
+
+            fetch("https://4c07-34-125-161-197.ngrok-free.app/post_message", {  // Replace with Flask ngrok URL
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    message: sourceText,
+                    src_lang: sourceLang,
+                    target_lang: targetLang,
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                loadingIndicator.style.display = "none";
+                resultArea.innerText = data.transcription || "Error during translation.";
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                loadingIndicator.style.display = "none";
+                resultArea.innerText = "Error connecting to the server.";
+            });
+        });
+
+        document.getElementById("showHistoryBtn").addEventListener("click", function () {
+            // Implement the logic to show conversation history here
+            alert("Showing conversation history...");
+        });
+    </script>
+</body>
+</html>

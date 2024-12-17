@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translation Assistant - IOM Migration Support</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+        }
+        header {
+            background: #0077be;
+            color: white;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: 3px solid #005a8d;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            text-align: center;
+            padding-bottom: 10px;
+        }
+        nav {
+            background: #005a8d;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+        }
+        .content {
+            background: white;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .translation-container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+        }
+        .translation-form-group {
+            margin-bottom: 15px;
+        }
+        .translation-form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .translation-form-group select, 
+        .translation-form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        #translateBtn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #0077be;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #translateBtn:hover {
+            background-color: #005a8d;
+        }
+        #resultArea {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+        }
+        #loadingIndicator {
+            display: none;
+            text-align: center;
+            color: #0077be;
+        }
+    </style>
+    <script>window.PICKAXE=window.PICKAXE||{pickaxes:[],style:"kHsjoCQGgI0GWASmgIdIAxiDA6wgM6CMbgC4UgDDAXYEAvDIBoGEBgG4CAWQIGYBgwCqApdoEjggjIaCcCoCA9gVAaAnBYBkqgBkKBwWoARYgJhrAFwqAFQEAHkIAXAQAASgbCfAhqSAAAsDMAYEc+QJckgGXFAhUGBQ30DEcIGo0wBBdgS5VAcAaATm8A1GoCpYQJQmgEVYAYgDBAQRKAhe0ASXIAURAOyAimqAFxCAsEGAQjSADFiACCIASoAACIBA+oAAeoBI8IAhHIAkEYAqCYAuaYAAIYAyboA2CYA/O4CwJYBLUIAWQYB8QoB2EIAtKYAAg4BuaoA9c4B7QYAJf4A6GICCSYCLh4CPYYCUI4BxGYCbOYB9eYCjTYBUVYCJq4BjX4AVZ4CZuYBFd4AvoYBMKoANpIAMSIBQFIDP3QDigDKKgFjigIhcLoBAC4CIF4BhGIAIDIBQhIBBYIAFHoBeKIBQsYAAcMAABSAApTAMQ1ACBAOjSgAYhAAogA0KQBczoAAhEAL0CATIRAOJEgDQmQBhcIAQ1EAigGAEotANxkgBj0QBIj4ATSUABlOAAhzAEbAgAaOQBSFYAmNkAuKxsQCOjYA8j8ABJaAKTjACIlABpACsugGwMQAiwIAm1MATAKAd07ABkcgGBKwCgVIBiocA0E2AIaBAAoDgALDQDl7oBagcAboiAGdFAFEJgAAYQDkIIAKAcAIYAAIkA9X6AXwdAJbbgAAAwAQo4A0BUAkMAAEEAb0iAZHJAFBngGzWI6AL0DAL4NgAQSQCsBoB6C8AExmALANAAXwgCACwA1BgAOQCAwIBGtMATS6AT4LAMQ7gDfbQDOG4AM3cAGoWACUTAONugEuLQAKwYArycAFjGAAxvAI0lgEeCwAjGoBAn0AkTCAFbrAOOogEwaQAAwIA0CMAIVCAQ/HADMVgF47QCEDoAF8sAb5iAdzZAJ48ADTAH3TgFYQwCXE4BiEEAAASAFjXALzWgAiKwAo+EAaghAFntQAknUAIgbACziQBC4MAGAhAFK8QAAicAAf7AFC4QARf0AJVxADpOQAsyUADeNAE87wAikIAACAA"},window.PICKAXE.pickaxes.push({id:"IOM_CHATBOT_PMEID",type:"fab"});const{id:_fid}=window.PICKAXE.pickaxes[0];fetch(`https://embed.pickaxeproject.com/axe/api/script/${_fid}`).then((e=>e.json())).then((({v:e})=>{const t=`https://cdn.jsdelivr.net/gh/pickaxeproject/cdn@${e}/dist`;if(!document.querySelector(`script[src="${t}/bundle.js"]`)){const e=document.createElement("script");e.src=t+"/bundle.js",e.defer=!0,document.head.appendChild(e)}}));</script>
+
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>IOM Migration Support</h1>
+        </div>
+    </header>
+
+    <nav>
+        <a href="">Home</a>
+        <a href="/Communite">Communite hub</a>
+        <a href="/translation">IOM.ia</a>
+        <a href="/med">Dr. Translate</a>
+        <a href="#">Migration Services</a>
+        <a href="/about">About Us</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <div class="container">
+        <div class="translation-container">
+            <h2>Translation Assistant</h2>
+            
+            <div class="translation-form-group">
+                <label for="sourceLanguage">Source Language:</label>
+                <select id="sourceLanguage">
+                    <option value="en_XX">English</option>
+                    <option value="fr_XX">French</option>
+                    <option value="ar_AR">Arabic</option>
+                    <option value="de_DE">German</option>
+                    <option value="es_XX">Spanish</option>
+                    <option value="it_IT">Italian</option>
+                    <option value="zh_CN">Chinese</option>
+                    <option value="ru_RU">Russian</option>
+                    <option value="ja_XX">Japanese</option>
+                    <option value="tr_TR">Turkish</option>
+                </select>
+            </div>
+
+            <div class="translation-form-group">
+                <label for="targetLanguage">Target Language:</label>
+                <select id="targetLanguage">
+                    <option value="ar_AR">Arabic</option>
+                    <option value="en_XX">English</option>
+                    <option value="fr_XX">French</option>
+                    <option value="de_DE">German</option>
+                    <option value="es_XX">Spanish</option>
+                    <option value="it_IT">Italian</option>
+                    <option value="zh_CN">Chinese</option>
+                    <option value="ru_RU">Russian</option>
+                    <option value="ja_XX">Japanese</option>
+                    <option value="tr_TR">Turkish</option>
+                </select>
+            </div>
+
+            <div class="translation-form-group">
+                <label for="sourceText">Text to Translate:</label>
+                <textarea id="sourceText" rows="5" placeholder="Enter your text here..."></textarea>
+            </div>
+
+            <button id="translateBtn">Translate</button>
+
+            <div id="loadingIndicator">
+                Translation in progress...
+            </div>
+
+            <div id="resultArea">
+                <strong>Translation Result:</strong>
+                <p id="translatedText">The translation result will appear here...</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 IOM Migration Support. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById("translateBtn").addEventListener("click", function () {
+            const sourceLang = document.getElementById("sourceLanguage").value;
+            const targetLang = document.getElementById("targetLanguage").value;
+            const sourceText = document.getElementById("sourceText").value;
+            const translatedTextElement = document.getElementById("translatedText");
+            const loadingIndicator = document.getElementById("loadingIndicator");
+    
+            loadingIndicator.style.display = "block";
+            translatedTextElement.innerText = "";
+    
+            fetch("https://4c07-34-125-161-197.ngrok-free.app/post_message", {  // Replace with Flask ngrok URL
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    message: sourceText,
+                    src_lang: sourceLang,
+                    target_lang: targetLang,
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                loadingIndicator.style.display = "none";
+                translatedTextElement.innerText = data.transcription || "Error during translation.";
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                loadingIndicator.style.display = "none";
+                translatedTextElement.innerText = "Error connecting to the server.";
+            });
+        });
+    </script>
+</body>
+</html>
